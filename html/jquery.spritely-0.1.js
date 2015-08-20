@@ -94,4 +94,63 @@
 			} else {
 				$._spritely.animate(options);
 			}
-			
+			return this; // so we can chain events
+		},
+		sprite: function(options) {
+			var options = $.extend({
+				type: 'sprite',
+				bounce: [0, 0, 1000] // up-down, left-right, milliseconds
+			}, options || {});
+			return $(this).spritely(options);
+		},
+		pan: function(options) {
+			var options = $.extend({
+				type: 'pan',
+				dir: 'left',
+				continuous: true,
+				speed: 1 // 1 pixel per frame
+			}, options || {});
+			return $(this).spritely(options);
+		},
+		flyToTap: function(options) {
+			var options = $.extend({
+				el_to_move: null,
+				type: 'moveToTap',
+				ms: 1000, // milliseconds
+				do_once: true
+			}, options || {});
+			if (options.el_to_move) {
+				$(options.el_to_move).active();
+			}
+			if ($._spritely.activeSprite) {
+				if (window.Touch) { // iphone method see http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone/9 or http://www.nimblekit.com/tutorials.html for clues...
+					$(this)[0].ontouchstart = function(e) {
+						var el_to_move = $._spritely.activeSprite;
+						var touch = e.touches[0];
+						var t = touch.pageY - (el_to_move.height() / 2);
+						var l = touch.pageX - (el_to_move.width() / 2);
+						el_to_move.animate({
+							top: t + 'px',
+							left: l + 'px'
+						}, 1000);
+					};
+				} else {
+					$(this).click(function(e) {
+						var el_to_move = $._spritely.activeSprite;
+						$(el_to_move).stop(true);
+						var w = el_to_move.width();
+						var h = el_to_move.height();
+						var l = e.pageX - (w / 2);
+						var t = e.pageY - (h / 2);
+						el_to_move.animate({
+							top: t + 'px',
+							left: l + 'px'
+						}, 1000);
+					});
+				}
+			}
+			return this;
+		},
+		active: function() {
+		
+		
