@@ -193,4 +193,16 @@
 			return this;
 		},
 		makeAbsolute: function() {
+			// remove an element from its current position in the DOM and
+			// position it absolutely, appended to the body tag.
+			return this.each(function() {
+				var el = $(this);
+				var pos = el.position();
+				el.css({position: "absolute", marginLeft: 0, marginTop: 0, top: pos.top, left: pos.left })
+					.remove()
+					.appendTo("body");
+			});
 		
+		}
+	})
+})(jQuery);
