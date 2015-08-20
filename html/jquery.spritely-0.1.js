@@ -152,5 +152,9 @@
 			return this;
 		},
 		active: function() {
-		
+			// the active sprite
+			$._spritely.activeSprite = this;
+			return this;
+		},
+		activeOnClick: function() {
 		
