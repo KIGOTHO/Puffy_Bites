@@ -159,4 +159,38 @@
 		activeOnClick: function() {
 			// make this the active script if clicked...
 			var el = $(this);
-			if (window.Touch) {
+			if (window.Touch) { // iphone method see http://cubiq.org/remove-onclick-delay-on-webkit-for-iphone/9 or http://www.nimblekit.com/tutorials.html for clues...
+				el[0].ontouchstart = function(e) {
+					$._spritely.activeSprite = el;
+				};
+			} else {
+				el.click(function(e) {
+					$._spritely.activeSprite = el;
+				});
+			}
+			return this;
+		},
+		spRandom: function(options) {
+			var options = $.extend({
+				top: 50,
+				left: 50,
+				right: 290,
+				bottom: 320,
+				speed: 4000,
+				pause: 0
+			}, options || {});
+			var el_id = $(this).attr('id');
+			var r = $._spritely.randomIntBetween;
+			var t = r(options.top, options.bottom);
+			var l = r(options.left, options.right);
+			$('#' + el_id).animate({
+				top: t + 'px', 
+				left: l + 'px'
+			}, options.speed)
+			window.setTimeout(function() {
+				$('#' + el_id).spRandom(options);
+			}, options.speed + options.pause)
+			return this;
+		},
+		makeAbsolute: function() {
+		
