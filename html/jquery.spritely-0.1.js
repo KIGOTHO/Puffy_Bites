@@ -67,4 +67,31 @@
 				}
 			}	
 		},
-		
+		randomIntBetween: function(lower, higher) {
+			return parseInt(rand_no = Math.floor((higher - (lower - 1)) * Math.random()) + lower);
+		}
+	};
+	$.fn.extend({
+		spritely: function(options) {
+			var options = $.extend({
+				type: 'sprite',
+				do_once: false,
+				width: null,
+				height: null,
+				fps: 12,
+				no_of_frames: 2
+			}, options || {});
+			options.el = this;
+			options.width = options.width || $(this).width() || 100;
+			options.height = options.height || $(this).height() || 100;
+			var get_rate = function() {
+                return parseInt(1000 / options.fps);
+            }
+            if (!options.do_once) {
+				window.setInterval(function() {
+					$._spritely.animate(options);
+				}, get_rate(options.fps));
+			} else {
+				$._spritely.animate(options);
+			}
+			
