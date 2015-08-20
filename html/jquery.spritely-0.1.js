@@ -33,4 +33,27 @@
 							total += w;
 						}
 					}
-				
+					if ($._spritely.instances[el_id]['current_frame'] >= frames.length - 1) {
+						$._spritely.instances[el_id]['current_frame'] = 0;
+					} else {
+						$._spritely.instances[el_id]['current_frame'] = $._spritely.instances[el_id]['current_frame'] + 1;
+					}
+					el.css('background-position', frames[$._spritely.instances[el_id]['current_frame']] + 'px 0');
+					if (options.bounce && options.bounce[0] > 0 && options.bounce[1] > 0) {
+						var ud = options.bounce[0]; // up-down
+						var lr = options.bounce[1]; // left-right
+						var ms = options.bounce[2]; // milliseconds
+						el
+							.animate({top: '+=' + ud + 'px', left: '-=' + lr + 'px'}, ms)
+							.animate({top: '-=' + ud + 'px', left: '+=' + lr + 'px'}, ms);
+					}
+				}
+				animate(el);
+			} else if (options.type == 'pan') {
+				if (options.dir == 'left') { 
+					$._spritely.instances[el_id]['l'] = ($._spritely.instances[el_id]['l'] - (options.speed || 1)) || 0;
+				} else {
+					$._spritely.instances[el_id]['l'] = ($._spritely.instances[el_id]['l'] + (options.speed || 1)) || 0;
+				}
+				if ($.browser.msie) {
+			
