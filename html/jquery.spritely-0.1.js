@@ -56,4 +56,15 @@
 					$._spritely.instances[el_id]['l'] = ($._spritely.instances[el_id]['l'] + (options.speed || 1)) || 0;
 				}
 				if ($.browser.msie) {
-			
+				    // fixme - the background-position property does not work
+				    // corretly in IE so we have to hack it here... Not ideal
+				    // especially as $.browser is depricated
+				    var bp_top = $(el).css('background-position-y') || '0';
+				    $(el).css('background-position', $._spritely.instances[el_id]['l'] + 'px ' + bp_top);
+				} else {
+				    var bp_top = ($(el).css('background-position').split(' ') || ' ')[1];
+				    $(el).css('background-position', $._spritely.instances[el_id]['l'] + 'px ' + bp_top);
+				}
+			}	
+		},
+		
