@@ -157,4 +157,6 @@
 			return this;
 		},
 		activeOnClick: function() {
-		
+			// make this the active script if clicked...
+			var el = $(this);
+			if (window.Touch) {
