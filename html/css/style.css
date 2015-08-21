@@ -139,3 +139,17 @@ nav li a{text-decoration: none;
 .dropdownhome ol li a{text-decoration: none;
              color:yellow;
             }
+#contentarea{
+           width:40%;
+            height:100%;
+            position: absolute;
+             left: 28%;
+             top: 12%;
+             z-index: 4;}
+#contentarea2{ 
+           width:27%;
+           background-color: lightgoldenrodyellow;
+            height:50%;
+             position: absolute;
+             left: 48%;
+             top: 19%;
