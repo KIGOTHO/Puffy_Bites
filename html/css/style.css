@@ -75,3 +75,18 @@ nav li a{text-decoration: none;
              position: absolute;
              left: 15%;
              z-index: 4;}
+.dropdown{ 
+           width:10%;
+            height:10%;
+         display: none;
+             position: absolute;
+             left: 55%;
+             top:4%;
+             z-index: 5;}
+.dropdownhome{ 
+           width:10%;
+            height:10%;
+             position: absolute;
+             left: 40%;
+             top:40%;
+             z-index: 5;}
