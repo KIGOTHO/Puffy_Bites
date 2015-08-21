@@ -114,4 +114,17 @@ nav li a{text-decoration: none;
 }
  
 
+.dropdown  ol{text-decoration: none;
+       list-style: none;
+       margin-left: 42%;
+      width: 8%;
+      margin-top: 3%;
+     padding: 0 0;
+    }
+.dropdown ol li{display: block;}
+
+.dropdown ol li a{text-decoration: none;
+             color:yellow;
+            }
+
 
